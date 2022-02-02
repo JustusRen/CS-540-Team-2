@@ -26,3 +26,6 @@ htmlcov/
 *,cover
 
 *.db
+
+sql/
+config.py
