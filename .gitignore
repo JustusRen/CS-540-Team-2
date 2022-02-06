@@ -27,5 +27,4 @@ htmlcov/
 
 *.db
 
-sql/
 config.py
