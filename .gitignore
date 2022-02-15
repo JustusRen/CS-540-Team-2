@@ -26,6 +26,5 @@ htmlcov/
 *,cover
 
 *.db
-
-sql/
+*.csv
 config.py
