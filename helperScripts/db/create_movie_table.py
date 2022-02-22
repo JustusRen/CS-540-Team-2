@@ -2,9 +2,10 @@
 import pymysql
 from sqlalchemy import create_engine
 import pandas as pd
+from config import config
 
 # you need to change the password and database name
-engine = create_engine('mysql+pymysql://movie_buddy_user:idfJauI12!@localhost/movie_buddy', echo=False)
+engine = create_engine(f'mysql+pymysql://{config.DB_NAME}', echo=False)
 connection = engine.raw_connection()
 #cursor = connection.cursor()
 
