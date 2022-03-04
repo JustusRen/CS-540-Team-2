@@ -45,6 +45,6 @@ class database:
     + sql_statements.CREATE_GENRE_TABLE
     + sql_statements.CREATE_GENRE_RELATIONSHIP_TABLE
     + sql_statements.CREATE_RATING_TABLE
-    + sql_statements.CREATE_MATCH_TABLE)
+    + sql_statements.CREATE_MATCH_TABLE, multi=True)
 
     print('SUCCESS: Create tables')
