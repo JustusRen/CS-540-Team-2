@@ -1,0 +1,7 @@
+CREATE_DB = 'CREATE DATABASE IF NOT EXISTS movie_buddy;'
+CREATE_USER_TABLE = 'USE movie_buddy; CREATE TABLE IF NOT EXISTS user (id INT PRIMARY KEY AUTO_INCREMENT, email VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, age int NOT NULL, first_name VARCHAR(255));'
+CREATE_GENRE_TABLE = 'use movie_buddy; create table genre (id INT PRIMARY KEY AUTO_INCREMENT,name VARCHAR(255) NOT NULL);'
+CREATE_GENRE_RELATIONSHIP_TABLE = 'use movie_buddy; create table genre_relationship (id INT PRIMARY KEY AUTO_INCREMENT,movie_id INT NOT NULL,genre_id INT NOT NULL,FOREIGN KEY (movie_id) REFERENCES movie(id),FOREIGN KEY (genre_id) REFERENCES genre(id));'
+CREATE_MATCH_TABLE = 'use movie_buddy; create table match (id INT PRIMARY KEY AUTO_INCREMENT,user_1 INT NOT NULL,user_2 INT NOT NULL, movie_id INT NOT NULL, FOREIGN KEY(user_1) REFERENCES user(id), FOREIGN KEY(user_2) REFERENCES user(id), FOREIGN KEY(movie_id) REFERENCES movie(id), );'
+CREATE_MOVIE_TABLE = 'use movie_buddy; create table movie (id INT PRIMARY KEY AUTO_INCREMENT,title VARCHAR(255));'
+CREATE_RATING_TABLE = 'USE movie_buddy;create table rating (id INT PRIMARY KEY AUTO_INCREMENT,user_id INT NOT NULL,movie_id INT NOT NULL,rating FLOAT NOT NULL,rating_binary INT NOT NULL,FOREIGN KEY(user_id) REFERENCES user(id),FOREIGN KEY(movie_id) REFERENCES movie(id));'

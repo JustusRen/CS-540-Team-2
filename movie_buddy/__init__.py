@@ -3,7 +3,7 @@ import os
 from os import path
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-from .config import DB_NAME
+import config
 
 db = SQLAlchemy()
 
@@ -11,8 +11,7 @@ def create_app():
     app = Flask(__name__)
     app.secret_key = os.urandom(24)
     app.run(debug=True)
-
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://{DB_NAME}'
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://{config.DB_NAME}'
     db.init_app(app)
 
     from .views import views

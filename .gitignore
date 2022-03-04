@@ -27,4 +27,6 @@ htmlcov/
 
 *.db
 
+*.csv
+
 config.py
