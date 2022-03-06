@@ -2,7 +2,6 @@ import pandas as pd
 import os
 import random
 
-#os.chdir('/Users/yui/Documents/SQL/ml-25m/')
 df = pd.read_csv('movieLens/raw/ratings.csv')
 df = df.drop(columns = ['timestamp'])
 

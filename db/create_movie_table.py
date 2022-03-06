@@ -5,7 +5,7 @@ import pandas as pd
 from config import config
 
 # you need to change the password and database name
-engine = create_engine(f'mysql+pymysql://{config.DB_NAME}', echo=False)
+engine = create_engine(f'mysql+pymysql://{config.DB_CONNECTION}', echo=False)
 connection = engine.raw_connection()
 #cursor = connection.cursor()
 
