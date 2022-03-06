@@ -1,6 +1,7 @@
 import mysql.connector
 import os 
 from . import sql_statements
+import pandas as pd
 
 class database:
   def __init__(self, host, user, pwd):
@@ -37,7 +38,6 @@ class database:
         user=self.user,
         password=self.pwd
       )
-    # create tables
     cursor = mydb.cursor()
     cursor.execute(
       sql_statements.CREATE_USER_TABLE 
@@ -48,3 +48,21 @@ class database:
     + sql_statements.CREATE_MATCH_TABLE, multi=True)
 
     print('SUCCESS: Create tables')
+
+  def insert_user_data(self):
+    mydb = mysql.connector.connect(
+        host=self.host,
+        user=self.user,
+        password=self.pwd
+      )
+    cursor = mydb.cursor()
+    df = pd.read_csv ('db/movieLens/processed/users.csv')
+    # TO-DO: write users.csv into mySQL DB
+
+  def insert_movie_genre_data(self):
+    return 0
+    # TO-DO: run Ke's script
+
+  def insert_rating_data(self):
+    return 0
+    # TO-DO: write rating.csv to mySQL DB
