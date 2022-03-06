@@ -10,7 +10,7 @@ connection = engine.raw_connection()
 #cursor = connection.cursor()
 
 #load gener.csv as dataframe
-genre_df = pd.read_csv("movielens_data/genre.csv")
+genre_df = pd.read_csv("movielens_data/raw/genre.csv")
 # Create gener table
 genre_df.to_sql(name='genre', con=engine, if_exists = 'append', index=False)
 query = 'SELECT * FROM genre'

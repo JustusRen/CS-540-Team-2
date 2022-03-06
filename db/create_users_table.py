@@ -10,7 +10,7 @@ import pandas as pd
 import os
 import random
 
-df = pd.read_csv('movielens_data/ratings.csv')
+df = pd.read_csv('movieLens/raw/ratings.csv')
 df = df.drop_duplicates(subset = ['userId'])
 df = df.drop(columns = ['movieId', 'rating', 'timestamp'])
 
@@ -39,4 +39,4 @@ df['email'] = emails
 df['password'] = password
 df['age'] = age
 
-df.to_csv('users.csv')
+df.to_csv('movieLens/processed/users.csv')
