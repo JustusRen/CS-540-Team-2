@@ -11,7 +11,7 @@ def create_app():
     app = Flask(__name__)
     app.secret_key = os.urandom(24)
     app.run(debug=True)
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://{config.DB_NAME}'
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://{config.DB_CONNECTION}'
     db.init_app(app)
 
     from .views import views
