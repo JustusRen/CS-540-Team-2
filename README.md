@@ -9,5 +9,5 @@ How to run this project:<br />
 5.) Install needed packages from requirements.txt<br />
 6.) Copy config_example.py and rename it to config.py<br />
 7.) Change the strings in config.py to your variables<br />
-8.) Execute 'export FLASK_APP=app' inside a terminal in the projects directory<br />
-9.) Run the local server with 'flask run'<br />
+8.) Execute export FLASK_APP=app inside a terminal in the projects directory<br />
+9.) Run the local server with flask run<br />
