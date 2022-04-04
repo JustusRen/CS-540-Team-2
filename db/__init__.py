@@ -2,6 +2,7 @@ import mysql.connector
 import os 
 from . import sql_statements
 import pandas as pd
+from pandas.io import sql
 
 class database:
   def __init__(self, host, user, pwd):
@@ -57,12 +58,17 @@ class database:
       )
     cursor = mydb.cursor()
     df = pd.read_csv ('db/movieLens/processed/users.csv')
-    # TO-DO: write users.csv into mySQL DB
+    df = df.drop(df.columns[0], axis=1)
+    
+    print(df)
 
   def insert_movie_genre_data(self):
     return 0
     # TO-DO: run Ke's script
 
   def insert_rating_data(self):
+    df = pd.read_csv ('db/movieLens/processed/rating.csv')
+    df = df.drop(df.columns[0], axis=1)
+    print(df)
     return 0
     # TO-DO: write rating.csv to mySQL DB
