@@ -10,6 +10,7 @@ mydb.create_tables()
 mydb.insert_user_data()
 mydb.insert_movie_genre_data()
 mydb.insert_rating_data()
+
 app = create_app()
 
 if __name__ == '__main__':
