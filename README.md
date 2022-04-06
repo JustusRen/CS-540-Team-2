@@ -14,3 +14,9 @@ This file contains important strings that should stay private. For example your 
 - Execute ``` export FLASK_APP=app ``` in a terminal in the projects directory. This will let Flask know, where the application is stored<br /><br />
 - Run the local server with the command ``` flask run ```<br /><br />
 
+TO-DO:
+- Import recommendation engine 
+- Store likes and dislikes
+- Show recommendation results
+- Automatically include preprocessed data
+
