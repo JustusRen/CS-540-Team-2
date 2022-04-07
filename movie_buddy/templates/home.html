@@ -2,13 +2,14 @@
 {% block title %}Home{% endblock %}
 {% block content %}
 <h1> {{ user.first_name }}, do you like this movie? </h1>
-<div class="card" style="width: 18rem;">
+<div class="card" style="width: 30rem;">
     <!--<img class="card-img-top" src="..." alt="Card image cap">-->
     <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <h5 class="card-title">{{ movie.title }}</h5>
+      <p class="card-text">Please choose if you like or dislike that movie. </p>
       <a href="#" class="btn btn-success">Like</a>
       <a href="#" class="btn btn-danger">Dislike</a>
+      <a href="#" class="btn btn-dark">I don't know</a>
     </div>
   </div>
 {% endblock %}

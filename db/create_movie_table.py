@@ -18,7 +18,7 @@ data = pd.read_sql(query, engine)
 print(data)
 
 #load movies.csv as dataframe
-movie_df = pd.read_csv("movielens_data/movies.csv", usecols = ['movie_id','title'])
+movie_df = pd.read_csv("movielens_data/raw/movies.csv", usecols = ['movie_id','title'])
 # Create movie table
 movie_df.to_sql(name='movie', con=engine, if_exists = 'append', index=False)
 query2 = 'SELECT * FROM movie'
@@ -26,7 +26,7 @@ data = pd.read_sql(query2, engine)
 print(data)
 
 #load id and genre column from movies.csv as dataframe
-genre_relation_df = pd.read_csv("movielens_data/movies.csv", usecols = ['movie_id','genres'])
+genre_relation_df = pd.read_csv("movielens_data/raw/movies.csv", usecols = ['movie_id','genres'])
 print(genre_relation_df)
 
 #create genre_relationship table
