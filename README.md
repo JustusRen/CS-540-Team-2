@@ -11,6 +11,7 @@
 - Copy config_example.py and rename it to config.py<br />
 This file contains important strings that should stay private. For example your database password. Therefore, it is ignored by git.<br /><br />
 - Change the strings in config.py to the values required on your system <br /><br />
+- Import data --To be continued
 - Execute ``` export FLASK_APP=app ``` in a terminal in the projects directory. This will let Flask know, where the application is stored<br /><br />
 - Run the local server with the command ``` flask run ```<br />
 This should start the server, create the database and insert all necessary data<br />
