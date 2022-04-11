@@ -6,6 +6,8 @@ from pandas.io import sql
 import config
 from sqlalchemy import create_engine
 import time
+import sys
+import warnings
 
 
 class Database:
@@ -65,7 +67,6 @@ class Database:
     df = pd.read_csv ('db/movieLens/processed/users.csv')
     df = df.drop(df.columns[0], axis=1)
     df.rename(columns = {'userId':'id', 'user_name':'first_name'}, inplace = True)
-    #engine = create_engine(f'mysql+pymysql://{config.DB_CONNECTION}', echo=False)
     time.sleep(0.1)
     try:
       df.to_sql('user', con=engine, if_exists='append', index= False)
@@ -77,7 +78,6 @@ class Database:
   def insert_genre_data(self, engine):
     df = pd.read_csv('db/movieLens/processed/genre.csv')
     df.rename(columns = {'genre_id':'id'}, inplace = True)
-    #engine = create_engine(f'mysql+pymysql://{config.DB_CONNECTION}', echo=False)
     time.sleep(0.1)
     try:
       df.to_sql('genre', con=engine, if_exists='append', index=False)
@@ -90,7 +90,6 @@ class Database:
     df = df.drop(df.columns[2], axis=1)
     df.rename(columns = {'movieId':'id'}, inplace = True)
 
-    #engine = create_engine(f'mysql+pymysql://{config.DB_CONNECTION}', echo=False)
     time.sleep(0.1)
 
     try:
@@ -100,10 +99,8 @@ class Database:
       print("WARNING: Movie data already exists.")
 
   def insert_movie_genre_relations(self, engine):
-    import sys
 
     if not sys.warnoptions:
-      import warnings
       warnings.simplefilter("ignore")
     
     genre_relation_df = pd.read_csv("db/movieLens/raw/movies.csv")
@@ -128,8 +125,26 @@ class Database:
     cols = df.columns.tolist()
     cols = cols[-1:] + cols[:-1]
     df = df[cols]
+    df = df.replace('Action', 1)
+    df = df.replace('Adventure', 2)
+    df = df.replace('Animation', 3)
+    df = df.replace("Children", 4)
+    df = df.replace('Comedy', 5)
+    df = df.replace('Crime', 6)
+    df = df.replace('Documentary', 7)
+    df = df.replace('Drama', 8)
+    df = df.replace('Fantasy', 9)
+    df = df.replace('Film-Noir', 10)
+    df = df.replace('Horror', 11)
+    df = df.replace('Musical', 12)
+    df = df.replace('Mystery', 13)
+    df = df.replace('Romance', 14)
+    df = df.replace('Sci-Fi', 15)
+    df = df.replace('Thriller', 16)
+    df = df.replace('War', 17)
+    df = df.replace('Western', 18)
+    df = df.replace('NoGenresListed', 19)
 
-    #engine = create_engine(f'mysql+pymysql://{config.DB_CONNECTION}', echo=False)
     time.sleep(0.1)
     df.to_sql('genre_relationship', con=engine, if_exists='append', index=False)
 
