@@ -9,6 +9,7 @@ Created on Thu Feb 10 20:50:24 2022
 import pandas as pd
 import os
 import random
+from werkzeug.security import generate_password_hash
 
 df = pd.read_csv('movieLens/raw/ratings.csv')
 df = df.drop_duplicates(subset = ['userId'])
@@ -27,7 +28,7 @@ for i in range(len(df)):
 password = []
 for i in range(len(df)):
     passw = 'password'+ str(i+1) 
-    password.append(passw)
+    password.append(generate_password_hash(passw, method='sha256'))
   
 age = []
 for i in range(len(df)):
