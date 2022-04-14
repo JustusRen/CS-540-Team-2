@@ -1,15 +1,27 @@
 {% extends "base.html" %}
 {% block title %}Home{% endblock %}
 {% block content %}
-<h1> {{ user.first_name }}, do you like this movie? </h1>
-<div class="card" style="width: 30rem;">
+<div class="card" style="margin-top: 25px;">
     <!--<img class="card-img-top" src="..." alt="Card image cap">-->
     <div class="card-body">
+      <h3> {{ user.first_name }}, do you like this movie? </h1>
       <h5 class="card-title">{{ movie.title }}</h5>
-      <p class="card-text">Please choose if you like or dislike that movie. </p>
-      <a href="#" class="btn btn-success">Like</a>
-      <a href="#" class="btn btn-danger">Dislike</a>
-      <a href="#" class="btn btn-dark">I don't know</a>
+      <form method="POST">
+        <div class="form-group">
+          <div class="mb-12">
+            <select id="rating" name="rating" class="form-select" style="width: 50%;">
+              <option value="5">Very good - 5</option>
+              <option value="4">Good - 4</option>
+              <option value="3">Neutral - 3</option>
+              <option value="2">Bad - 2</option>
+              <option value="1">Very bad - 1</option>
+            </select>
+            <br>
+            <button type="submit" class="btn btn-dark" style="width: 50%; margin-top: 5px;">Rate</button>
+          </div>
+        </div>
+      </form>
+      <a href="." class="btn btn-dark" style="width: 50%;">I don't know</a>
     </div>
   </div>
 {% endblock %}
