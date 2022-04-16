@@ -26,4 +26,5 @@ def home():
             db.session.commit()
             flash('New rating inserted!', category='success')
             return redirect(url_for('views.home'))
+                
         return render_template("home.html", user=current_user, movie=movie)

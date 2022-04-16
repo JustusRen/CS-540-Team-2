@@ -9,6 +9,15 @@ import time
 import sys
 import warnings
 
+import pandas as pd 
+from surprise import SVD
+from surprise import Dataset
+from surprise.model_selection import cross_validate
+from collections import defaultdict
+from surprise import Reader
+from sqlalchemy import create_engine, update
+
+from sqlalchemy.sql import select
 
 class Database:
   def __init__(self, host, user, pwd):
@@ -56,9 +65,8 @@ class Database:
       + sql_statements.CREATE_GENRE_TABLE
       + sql_statements.CREATE_GENRE_RELATIONSHIP_TABLE
       + sql_statements.CREATE_RATING_TABLE
-      + sql_statements.CREATE_BUDDIES_TABLE 
-     )
-
+      + sql_statements.CREATE_RECOMMENDATION_TABLE 
+      ) 
       print('SUCCESS: Create tables.')
     except:
       print('ERROR: Could not create table.')
@@ -162,10 +170,62 @@ class Database:
     cols = df.columns.tolist()
     cols = cols[-1:] + cols[:-1]
     df = df[cols]
-    engine = create_engine(f'mysql+pymysql://{config.DB_CONNECTION}', echo=False)
     time.sleep(0.1)
     try:
       df.to_sql('rating', con=engine, if_exists='append', index = False)
       print("SUCCESS: Rating data inserted.")
     except:
       print("WARNING: Rating data already exists.")
+
+  def get_table(self, engine, table):
+    query = 'SELECT * FROM ' + table
+    data = pd.read_sql(query, engine)
+    return data
+  
+ 
+
+  def top_n_to_db(self, engine):
+
+    def get_top_n(predictions, n=10):
+      top_n = defaultdict(list)
+      for uid, iid, true_r, est, _ in predictions:
+          top_n[uid].append((iid, est))
+
+      for uid, user_ratings in top_n.items():
+          user_ratings.sort(key=lambda x: x[1], reverse=True)
+          top_n[uid] = user_ratings[:n]
+      return top_n
+    
+    df_rec = pd.DataFrame()
+    id = 1
+    df_ratings = self.get_table(engine, "rating")
+
+    reader = Reader(rating_scale=(1, 5.0))
+    data = Dataset.load_from_df(df_ratings[['user_id', 'movie_id', 'rating']], reader)
+    algo = SVD()
+
+    trainset = data.build_full_trainset()
+    algo.fit(trainset)
+    users = list(set(df_ratings['user_id'].tolist()))
+    for user_id in users:
+      df_ratings_test = df_ratings[df_ratings['user_id'] == user_id]
+
+      test = Dataset.load_from_df(df_ratings_test[['user_id', 'movie_id', 'rating']], reader)
+      testset1 = test.build_full_trainset()
+      testset = testset1.build_testset()
+
+      predictions = algo.test(testset)
+
+      top_n = get_top_n(predictions, n=3)
+      for uid, user_ratings in top_n.items():
+          result = [iid for (iid, _) in user_ratings]
+      df_row = pd.DataFrame({ 'user_id' : [user_id], 'rec1' : [result[0]], 'rec2' : [result[1]], 'rec3' : [result[2]], 'id' : [id] })
+      if not sys.warnoptions:
+        warnings.simplefilter("ignore")
+      df_rec = df_rec.append(df_row)
+      id += 1
+    cols = df_rec.columns.tolist()
+    cols = cols[-1:] + cols[:-1]
+    df_rec = df_rec[cols]
+    time.sleep(0.1)
+    df_rec.to_sql('recommendation', con=engine, if_exists='append', index=False)
