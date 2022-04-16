@@ -20,3 +20,10 @@ class Rating(db.Model):
     user_id = db.Column(db.Integer)
     movie_id = db.Column(db.Integer)
     rating = db.Column(db.Float)
+
+class Recommendation(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    rec1 = db.Column(db.Integer)
+    rec2 = db.Column(db.Integer)
+    rec3 = db.Column(db.Integer)

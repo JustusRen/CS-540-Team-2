@@ -4,8 +4,12 @@ from os import path
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 import config
+from database import Database
+from sqlalchemy import create_engine
 
 db = SQLAlchemy()
+database_manager = Database(config.HOST, config.USER, config.PWD)
+engine = create_engine(f'mysql+pymysql://{config.DB_CONNECTION}', echo=False)
 
 def create_app():
     app = Flask(__name__)

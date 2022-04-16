@@ -72,7 +72,7 @@ class Database:
       print('ERROR: Could not create table.')
 
   def insert_user_data(self, engine):
-    df = pd.read_csv ('db/movieLens/processed/users.csv')
+    df = pd.read_csv ('database/movieLens/processed/users.csv')
     df = df.drop(df.columns[0], axis=1)
     df.rename(columns = {'userId':'id', 'user_name':'first_name'}, inplace = True)
     time.sleep(0.1)
@@ -84,7 +84,7 @@ class Database:
 
 
   def insert_genre_data(self, engine):
-    df = pd.read_csv('db/movieLens/processed/genre.csv')
+    df = pd.read_csv('database/movieLens/processed/genre.csv')
     df.rename(columns = {'genre_id':'id'}, inplace = True)
     time.sleep(0.1)
     try:
@@ -94,7 +94,7 @@ class Database:
       print("WARNING: Genre data already exists.")  
     
   def insert_movie_data(self, engine):   
-    df = pd.read_csv("db/movieLens/raw/movies.csv")
+    df = pd.read_csv("database/movieLens/raw/movies.csv")
     df = df.drop(df.columns[2], axis=1)
     df.rename(columns = {'movieId':'id'}, inplace = True)
 
@@ -111,7 +111,7 @@ class Database:
     if not sys.warnoptions:
       warnings.simplefilter("ignore")
     
-    genre_relation_df = pd.read_csv("db/movieLens/raw/movies.csv")
+    genre_relation_df = pd.read_csv("database/movieLens/raw/movies.csv")
     
     df = pd.DataFrame()
     id = 1
@@ -162,7 +162,7 @@ class Database:
       print("WARNING: Genre_relationship data already exists.")
 
   def insert_rating_data(self, engine):
-    df = pd.read_csv ('db/movieLens/processed/rating.csv')
+    df = pd.read_csv ('database/movieLens/processed/rating.csv')
     df = df.drop(df.columns[0], axis=1)
     df = df.drop(df.columns[3], axis=1)
     df.rename(columns = {'userId':'user_id', 'movieId':'movie_id'}, inplace = True)
@@ -182,7 +182,16 @@ class Database:
     data = pd.read_sql(query, engine)
     return data
   
- 
+  def drop_table(self, table):
+    mydb = mysql.connector.connect(
+        host=self.host,
+        user=self.user,
+        password=self.pwd
+      )
+    cursor = mydb.cursor()
+    cursor.execute(
+      "USE movie_buddy; DROP TABLE " + table + ";"
+    ) 
 
   def top_n_to_db(self, engine):
 
@@ -228,4 +237,4 @@ class Database:
     cols = cols[-1:] + cols[:-1]
     df_rec = df_rec[cols]
     time.sleep(0.1)
-    df_rec.to_sql('recommendation', con=engine, if_exists='append', index=False)
+    df_rec.to_sql('recommendation', con=engine, if_exists='replace', index=False)

@@ -1,5 +1,5 @@
 from movie_buddy import create_app
-from db import Database
+from database import Database
 import config
 
 
