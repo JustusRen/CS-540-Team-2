@@ -190,7 +190,8 @@ class Database:
       )
     cursor = mydb.cursor()
     cursor.execute(
-      "USE movie_buddy; DROP TABLE " + table + ";"
+      "USE movie_buddy; DROP TABLE " + table, multi=True 
+     
     ) 
 
   def top_n_to_db(self, engine):
