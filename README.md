@@ -16,13 +16,6 @@ This file contains important strings that should stay private. For example your 
 - Run the local server with the command ``` flask run ```<br />
 This should start the server, create the database and insert all necessary data<br />
 
-Known bugs:
+Problems that can occure: 
 - Sometimes requirements.txt doesn't install all modules. So you might have to install some modules manually by using ``` pip3 install [module_name] ```
-
-TO-DO:
-- Import recommendation engine 
-- Store likes and dislikes
-- Show recommendation results
-- Fix import of preprocessed data from MovieLens (more specific: find out why adding genres and ratings doesn't work, add movie_genre relationship data)
-- Hash passwords from csv
 

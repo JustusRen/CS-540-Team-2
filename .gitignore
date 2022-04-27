@@ -31,5 +31,4 @@ htmlcov/
 raw/
 config.py
 
-##pip3 install pymysql
-##pip3 install mysql-connector-python
+testvenv/
