@@ -1,6 +1,5 @@
 # CS-540-Team-2
 ## Movie Buddy repository
-<br /><br />
 ### Get started:<br />
 - Clone the repository by tying
 ``` git clone https://github.com/JustusRen/CS-540-Team-2.git ``` in your command line <br /><br />
