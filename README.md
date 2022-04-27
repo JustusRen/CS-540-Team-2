@@ -17,7 +17,7 @@ The config.py file should stay private because it only applies to your system an
 - Run the "set rating threshold" script by executing ``` python3 database/set_rating_threshold.py ```
 - Run the script to initialize the database by executing ``` python3 init_db.py ```
 - Execute ``` export FLASK_APP=app ``` in a terminal in the projects directory. This will let Flask know, where the application is stored<br />
-- Run the local server with the command ``` flask run ```. This should start the server<br />
+- Run the local server with the command ``` flask run ```. This should start the server. Enter the IP shown in the terminal to access the webpage. <br />
 
 Problems that can occure: 
 - Sometimes requirements.txt doesn't install all modules. So you might have to install some modules manually by using ``` pip3 install [module_name] ```
