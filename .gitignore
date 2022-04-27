@@ -27,8 +27,13 @@ htmlcov/
 
 *.db
 
-*.csv
-raw/
+rating.csv
+users.csv
+links.csv
+movies.csv
+ratings.csv
+tags.csv
+u.data
 config.py
 
 testvenv/
