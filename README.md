@@ -1,20 +1,25 @@
 # CS-540-Team-2
-## Movie Buddy repository
+## Movie Buddy repository 
+The project was implemented with Python 3.8.10. The test system ran Ubuntu 20.04.
 ### Get started:<br />
-- Clone the repository by tying
-``` git clone https://github.com/JustusRen/CS-540-Team-2.git ``` in your command line <br /><br />
-- Execute ``` cd CS-540-TEAM-2``` in a terminal to enter the projects directory<br /><br />
-- Create a new virtual environment by executing ``` python3 -m venv venv ```<br />The project was implemented and tested on Python 3.8.10.<br /><br />
-- Activate your venv by executing ``` source venv/bin/activate ```<br /><br />
-- Install needed packages from requirements.txt by executing ``` pip3 install -r requirements.txt ``` <br /><br />
+- Clone the repository by typing and executing
+``` git clone https://github.com/JustusRen/CS-540-Team-2.git ``` in your terminal <br />
+- Execute ``` cd CS-540-TEAM-2``` in your terminal to enter the projects directory<br />
+- Create a new virtual environment by executing ``` python3 -m venv venv ```<br />
+- Activate your venv by executing ``` source venv/bin/activate ```<br />
+- Install needed packages from requirements.txt by executing ``` pip3 install -r requirements.txt ``` <br />
 - Copy config_example.py and rename it to config.py<br />
-This file contains important strings that should stay private. For example your database password. Therefore, it is ignored by git.<br /><br />
-- Change the strings in config.py to the values required on your system <br /><br />
-- Import data --To be continued
-- Execute ``` export FLASK_APP=app ``` in a terminal in the projects directory. This will let Flask know, where the application is stored<br /><br />
-- Run the local server with the command ``` flask run ```<br />
-This should start the server, create the database and insert all necessary data<br />
+The config.py file should stay private because it only applies to your system and contain information about your database connection. Therefore, it is ignored by git.<br />
+- Change the strings in config.py to the values required on your system <br />
+- Download the dataset from https://www.kaggle.com/datasets/rajmehra03/movielens100k
+- Insert the data in the database/movieLens/raw folder. 
+- Run the "create user" script by executing ``` python3 database/create_users_table.py ```
+- Run the "set rating threshold" script by executing ``` python3 database/set_rating_threshold.py ```
+- Run the script to initialize the database by executing ``` python3 init_db.py ```
+- Execute ``` export FLASK_APP=app ``` in a terminal in the projects directory. This will let Flask know, where the application is stored<br />
+- Run the local server with the command ``` flask run ```. This should start the server<br />
 
 Problems that can occure: 
 - Sometimes requirements.txt doesn't install all modules. So you might have to install some modules manually by using ``` pip3 install [module_name] ```
+- On some machines an error like this might appear: "mysql.connector, multi=True, sql variable assignment not working". To fix this add the multi=True when you try to execute a sql statment. This should look like ``` cursor.execute(query, multi=True) ```
 
